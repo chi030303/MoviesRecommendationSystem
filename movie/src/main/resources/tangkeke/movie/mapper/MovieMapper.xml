@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tangkeke.movie.mapper.MovieMapper">
+  <resultMap id="BaseResultMap" type="tangkeke.movie.entity.Movie">
+    <id column="mid" jdbcType="VARCHAR" property="mid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="tangkeke.movie.entity.Movie">
+    <result column="title" jdbcType="LONGVARCHAR" property="title" />
+    <result column="original_title" jdbcType="LONGVARCHAR" property="originalTitle" />
+    <result column="genres" jdbcType="LONGVARCHAR" property="genres" />
+    <result column="original_language" jdbcType="LONGVARCHAR" property="originalLanguage" />
+    <result column="spoken_languages" jdbcType="LONGVARCHAR" property="spokenLanguages" />
+    <result column="overview" jdbcType="LONGVARCHAR" property="overview" />
+    <result column="runtime" jdbcType="LONGVARCHAR" property="runtime" />
+    <result column="release_date" jdbcType="LONGVARCHAR" property="releaseDate" />
+    <result column="production_companies" jdbcType="LONGVARCHAR" property="productionCompanies" />
+    <result column="production_countries" jdbcType="LONGVARCHAR" property="productionCountries" />
+    <result column="status" jdbcType="LONGVARCHAR" property="status" />
+    <result column="budget" jdbcType="LONGVARCHAR" property="budget" />
+    <result column="revenue" jdbcType="LONGVARCHAR" property="revenue" />
+    <result column="popularity" jdbcType="LONGVARCHAR" property="popularity" />
+    <result column="vote_count" jdbcType="LONGVARCHAR" property="voteCount" />
+    <result column="vote_average" jdbcType="LONGVARCHAR" property="voteAverage" />
+    <result column="director" jdbcType="LONGVARCHAR" property="director" />
+    <result column="actor" jdbcType="LONGVARCHAR" property="actor" />
+    <result column="character" jdbcType="LONGVARCHAR" property="character" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mid
+  </sql>
+  <sql id="Blob_Column_List">
+    title, original_title, genres, original_language, spoken_languages, overview, runtime, 
+    release_date, production_companies, production_countries, status, budget, revenue, 
+    popularity, vote_count, vote_average, director, actor, character
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="tangkeke.movie.entity.MovieExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from movie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="tangkeke.movie.entity.MovieExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from movie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+      *
+    from movie
+    where mid = #{mid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from movie
+    where mid = #{mid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="tangkeke.movie.entity.MovieExample">
+    delete from movie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tangkeke.movie.entity.Movie">
+    insert into movie (mid, title, original_title, 
+      genres, original_language, spoken_languages, 
+      overview, runtime, release_date, 
+      production_companies, production_countries, 
+      status, budget, revenue, 
+      popularity, vote_count, vote_average, 
+      director, actor, character
+      )
+    values (#{mid,jdbcType=VARCHAR}, #{title,jdbcType=LONGVARCHAR}, #{originalTitle,jdbcType=LONGVARCHAR}, 
+      #{genres,jdbcType=LONGVARCHAR}, #{originalLanguage,jdbcType=LONGVARCHAR}, #{spokenLanguages,jdbcType=LONGVARCHAR}, 
+      #{overview,jdbcType=LONGVARCHAR}, #{runtime,jdbcType=LONGVARCHAR}, #{releaseDate,jdbcType=LONGVARCHAR}, 
+      #{productionCompanies,jdbcType=LONGVARCHAR}, #{productionCountries,jdbcType=LONGVARCHAR}, 
+      #{status,jdbcType=LONGVARCHAR}, #{budget,jdbcType=LONGVARCHAR}, #{revenue,jdbcType=LONGVARCHAR}, 
+      #{popularity,jdbcType=LONGVARCHAR}, #{voteCount,jdbcType=LONGVARCHAR}, #{voteAverage,jdbcType=LONGVARCHAR}, 
+      #{director,jdbcType=LONGVARCHAR}, #{actor,jdbcType=LONGVARCHAR}, #{character,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="tangkeke.movie.entity.Movie">
+    insert into movie
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="originalTitle != null">
+        original_title,
+      </if>
+      <if test="genres != null">
+        genres,
+      </if>
+      <if test="originalLanguage != null">
+        original_language,
+      </if>
+      <if test="spokenLanguages != null">
+        spoken_languages,
+      </if>
+      <if test="overview != null">
+        overview,
+      </if>
+      <if test="runtime != null">
+        runtime,
+      </if>
+      <if test="releaseDate != null">
+        release_date,
+      </if>
+      <if test="productionCompanies != null">
+        production_companies,
+      </if>
+      <if test="productionCountries != null">
+        production_countries,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="budget != null">
+        budget,
+      </if>
+      <if test="revenue != null">
+        revenue,
+      </if>
+      <if test="popularity != null">
+        popularity,
+      </if>
+      <if test="voteCount != null">
+        vote_count,
+      </if>
+      <if test="voteAverage != null">
+        vote_average,
+      </if>
+      <if test="director != null">
+        director,
+      </if>
+      <if test="actor != null">
+        actor,
+      </if>
+      <if test="character != null">
+        character,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="originalTitle != null">
+        #{originalTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="genres != null">
+        #{genres,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="originalLanguage != null">
+        #{originalLanguage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="spokenLanguages != null">
+        #{spokenLanguages,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="overview != null">
+        #{overview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="runtime != null">
+        #{runtime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="releaseDate != null">
+        #{releaseDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productionCompanies != null">
+        #{productionCompanies,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productionCountries != null">
+        #{productionCountries,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="budget != null">
+        #{budget,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="revenue != null">
+        #{revenue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="popularity != null">
+        #{popularity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="voteCount != null">
+        #{voteCount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="voteAverage != null">
+        #{voteAverage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="director != null">
+        #{director,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="actor != null">
+        #{actor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="character != null">
+        #{character,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tangkeke.movie.entity.MovieExample" resultType="java.lang.Long">
+    select count(*) from movie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update movie
+    <set>
+      <if test="row.mid != null">
+        mid = #{row.mid,jdbcType=VARCHAR},
+      </if>
+      <if test="row.title != null">
+        title = #{row.title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.originalTitle != null">
+        original_title = #{row.originalTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.genres != null">
+        genres = #{row.genres,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.originalLanguage != null">
+        original_language = #{row.originalLanguage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.spokenLanguages != null">
+        spoken_languages = #{row.spokenLanguages,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.overview != null">
+        overview = #{row.overview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.runtime != null">
+        runtime = #{row.runtime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.releaseDate != null">
+        release_date = #{row.releaseDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.productionCompanies != null">
+        production_companies = #{row.productionCompanies,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.productionCountries != null">
+        production_countries = #{row.productionCountries,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.status != null">
+        status = #{row.status,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.budget != null">
+        budget = #{row.budget,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.revenue != null">
+        revenue = #{row.revenue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.popularity != null">
+        popularity = #{row.popularity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.voteCount != null">
+        vote_count = #{row.voteCount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.voteAverage != null">
+        vote_average = #{row.voteAverage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.director != null">
+        director = #{row.director,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.actor != null">
+        actor = #{row.actor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.character != null">
+        character = #{row.character,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update movie
+    set mid = #{row.mid,jdbcType=VARCHAR},
+      title = #{row.title,jdbcType=LONGVARCHAR},
+      original_title = #{row.originalTitle,jdbcType=LONGVARCHAR},
+      genres = #{row.genres,jdbcType=LONGVARCHAR},
+      original_language = #{row.originalLanguage,jdbcType=LONGVARCHAR},
+      spoken_languages = #{row.spokenLanguages,jdbcType=LONGVARCHAR},
+      overview = #{row.overview,jdbcType=LONGVARCHAR},
+      runtime = #{row.runtime,jdbcType=LONGVARCHAR},
+      release_date = #{row.releaseDate,jdbcType=LONGVARCHAR},
+      production_companies = #{row.productionCompanies,jdbcType=LONGVARCHAR},
+      production_countries = #{row.productionCountries,jdbcType=LONGVARCHAR},
+      status = #{row.status,jdbcType=LONGVARCHAR},
+      budget = #{row.budget,jdbcType=LONGVARCHAR},
+      revenue = #{row.revenue,jdbcType=LONGVARCHAR},
+      popularity = #{row.popularity,jdbcType=LONGVARCHAR},
+      vote_count = #{row.voteCount,jdbcType=LONGVARCHAR},
+      vote_average = #{row.voteAverage,jdbcType=LONGVARCHAR},
+      director = #{row.director,jdbcType=LONGVARCHAR},
+      actor = #{row.actor,jdbcType=LONGVARCHAR},
+      character = #{row.character,jdbcType=LONGVARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update movie
+    set mid = #{row.mid,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tangkeke.movie.entity.Movie">
+    update movie
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="originalTitle != null">
+        original_title = #{originalTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="genres != null">
+        genres = #{genres,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="originalLanguage != null">
+        original_language = #{originalLanguage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="spokenLanguages != null">
+        spoken_languages = #{spokenLanguages,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="overview != null">
+        overview = #{overview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="runtime != null">
+        runtime = #{runtime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="releaseDate != null">
+        release_date = #{releaseDate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productionCompanies != null">
+        production_companies = #{productionCompanies,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productionCountries != null">
+        production_countries = #{productionCountries,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="budget != null">
+        budget = #{budget,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="revenue != null">
+        revenue = #{revenue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="popularity != null">
+        popularity = #{popularity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="voteCount != null">
+        vote_count = #{voteCount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="voteAverage != null">
+        vote_average = #{voteAverage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="director != null">
+        director = #{director,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="actor != null">
+        actor = #{actor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="character != null">
+        character = #{character,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="tangkeke.movie.entity.Movie">
+    update movie
+    set title = #{title,jdbcType=LONGVARCHAR},
+      original_title = #{originalTitle,jdbcType=LONGVARCHAR},
+      genres = #{genres,jdbcType=LONGVARCHAR},
+      original_language = #{originalLanguage,jdbcType=LONGVARCHAR},
+      spoken_languages = #{spokenLanguages,jdbcType=LONGVARCHAR},
+      overview = #{overview,jdbcType=LONGVARCHAR},
+      runtime = #{runtime,jdbcType=LONGVARCHAR},
+      release_date = #{releaseDate,jdbcType=LONGVARCHAR},
+      production_companies = #{productionCompanies,jdbcType=LONGVARCHAR},
+      production_countries = #{productionCountries,jdbcType=LONGVARCHAR},
+      status = #{status,jdbcType=LONGVARCHAR},
+      budget = #{budget,jdbcType=LONGVARCHAR},
+      revenue = #{revenue,jdbcType=LONGVARCHAR},
+      popularity = #{popularity,jdbcType=LONGVARCHAR},
+      vote_count = #{voteCount,jdbcType=LONGVARCHAR},
+      vote_average = #{voteAverage,jdbcType=LONGVARCHAR},
+      director = #{director,jdbcType=LONGVARCHAR},
+      actor = #{actor,jdbcType=LONGVARCHAR},
+      character = #{character,jdbcType=LONGVARCHAR}
+    where mid = #{mid,jdbcType=VARCHAR}
+  </update>
+</mapper>

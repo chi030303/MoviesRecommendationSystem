@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tangkeke.movie.mapper.RatingMapper">
+  <resultMap id="BaseResultMap" type="tangkeke.movie.entity.Rating">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <id column="mid" jdbcType="VARCHAR" property="mid" />
+    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="tangkeke.movie.entity.Rating">
+    <result column="score" jdbcType="LONGVARCHAR" property="score" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uid, mid, timestamp
+  </sql>
+  <sql id="Blob_Column_List">
+    score
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="tangkeke.movie.entity.RatingExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rating
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="tangkeke.movie.entity.RatingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rating
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rating
+    where uid = #{uid,jdbcType=INTEGER}
+      and mid = #{mid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from rating
+    where uid = #{uid,jdbcType=INTEGER}
+      and mid = #{mid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="tangkeke.movie.entity.RatingExample">
+    delete from rating
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="tangkeke.movie.entity.Rating">
+    insert into rating (uid, mid, timestamp, 
+      score)
+    values (#{uid,jdbcType=INTEGER}, #{mid,jdbcType=VARCHAR}, #{timestamp,jdbcType=BIGINT}, 
+      #{score,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="tangkeke.movie.entity.Rating">
+    insert into rating
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="tangkeke.movie.entity.RatingExample" resultType="java.lang.Long">
+    select count(*) from rating
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rating
+    <set>
+      <if test="row.uid != null">
+        uid = #{row.uid,jdbcType=INTEGER},
+      </if>
+      <if test="row.mid != null">
+        mid = #{row.mid,jdbcType=VARCHAR},
+      </if>
+      <if test="row.timestamp != null">
+        timestamp = #{row.timestamp,jdbcType=BIGINT},
+      </if>
+      <if test="row.score != null">
+        score = #{row.score,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update rating
+    set uid = #{row.uid,jdbcType=INTEGER},
+      mid = #{row.mid,jdbcType=VARCHAR},
+      timestamp = #{row.timestamp,jdbcType=BIGINT},
+      score = #{row.score,jdbcType=LONGVARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rating
+    set uid = #{row.uid,jdbcType=INTEGER},
+      mid = #{row.mid,jdbcType=VARCHAR},
+      timestamp = #{row.timestamp,jdbcType=BIGINT}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="tangkeke.movie.entity.Rating">
+    update rating
+    <set>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+      and mid = #{mid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="tangkeke.movie.entity.Rating">
+    update rating
+    set timestamp = #{timestamp,jdbcType=BIGINT},
+      score = #{score,jdbcType=LONGVARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+      and mid = #{mid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tangkeke.movie.entity.Rating">
+    update rating
+    set timestamp = #{timestamp,jdbcType=BIGINT}
+    where uid = #{uid,jdbcType=INTEGER}
+      and mid = #{mid,jdbcType=VARCHAR}
+  </update>
+</mapper>
