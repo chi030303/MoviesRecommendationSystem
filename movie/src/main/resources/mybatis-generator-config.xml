@@ -35,5 +35,7 @@
     <table tableName="rating"></table>
     <table tableName="tag"></table>
     <table tableName="user"></table>
+    <table tableName="popular_movie"></table>
+    <table tableName="user_recs"></table>
     </context>
 </generatorConfiguration>

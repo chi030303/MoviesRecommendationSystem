@@ -2,9 +2,6 @@ package tangkeke.movie.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
 import tangkeke.movie.entity.User;
 import tangkeke.movie.entity.UserExample;
 

@@ -34,10 +34,10 @@ public class SecurityConfig {
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(authorize -> 
             authorize
-            .requestMatchers("/movie/login").permitAll()
-            .requestMatchers("/movie/register").permitAll()
-            .requestMatchers("/movie/100").permitAll()
-            .requestMatchers("/item/aa").hasAuthority("admin")
+            .requestMatchers("/login").permitAll()
+            // .requestMatchers("/movie").permitAll()
+            // .requestMatchers("/movie/100").permitAll()
+            // .requestMatchers("/item/aa").hasAuthority("admin")
             .anyRequest().authenticated()
         )
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -57,6 +57,6 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer ignoringCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/movie/login");
+        return (web) -> web.ignoring().requestMatchers("/login");
     }
 }

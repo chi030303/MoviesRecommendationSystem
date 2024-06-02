@@ -31,4 +31,8 @@ public interface MovieMapper {
     int updateByPrimaryKeySelective(Movie row);
 
     int updateByPrimaryKeyWithBLOBs(Movie row);
+
+    List<Movie> selectTop30Movies();
+
+    List<Movie> selectPersonalityMovies(Integer uid);
 }

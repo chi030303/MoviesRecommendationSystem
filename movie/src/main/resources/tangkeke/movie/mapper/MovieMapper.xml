@@ -24,6 +24,7 @@
     <result column="director" jdbcType="LONGVARCHAR" property="director" />
     <result column="actor" jdbcType="LONGVARCHAR" property="actor" />
     <result column="character" jdbcType="LONGVARCHAR" property="character" />
+    <result column="poster_path" jdbcType="LONGVARCHAR" property="posterPath" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -89,7 +90,7 @@
   <sql id="Blob_Column_List">
     title, original_title, genres, original_language, spoken_languages, overview, runtime, 
     release_date, production_companies, production_countries, status, budget, revenue, 
-    popularity, vote_count, vote_average, director, actor, character
+    popularity, vote_count, vote_average, director, actor, 'character', poster_path
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="tangkeke.movie.entity.MovieExample" resultMap="ResultMapWithBLOBs">
     select
@@ -122,10 +123,11 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
-    select 
-      *
-    from movie
-    where mid = #{mid,jdbcType=VARCHAR}
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from movie where mid = #{mid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from movie
@@ -144,16 +146,16 @@
       production_companies, production_countries, 
       status, budget, revenue, 
       popularity, vote_count, vote_average, 
-      director, actor, character
-      )
+      director, actor, character, 
+      poster_path)
     values (#{mid,jdbcType=VARCHAR}, #{title,jdbcType=LONGVARCHAR}, #{originalTitle,jdbcType=LONGVARCHAR}, 
       #{genres,jdbcType=LONGVARCHAR}, #{originalLanguage,jdbcType=LONGVARCHAR}, #{spokenLanguages,jdbcType=LONGVARCHAR}, 
       #{overview,jdbcType=LONGVARCHAR}, #{runtime,jdbcType=LONGVARCHAR}, #{releaseDate,jdbcType=LONGVARCHAR}, 
       #{productionCompanies,jdbcType=LONGVARCHAR}, #{productionCountries,jdbcType=LONGVARCHAR}, 
       #{status,jdbcType=LONGVARCHAR}, #{budget,jdbcType=LONGVARCHAR}, #{revenue,jdbcType=LONGVARCHAR}, 
       #{popularity,jdbcType=LONGVARCHAR}, #{voteCount,jdbcType=LONGVARCHAR}, #{voteAverage,jdbcType=LONGVARCHAR}, 
-      #{director,jdbcType=LONGVARCHAR}, #{actor,jdbcType=LONGVARCHAR}, #{character,jdbcType=LONGVARCHAR}
-      )
+      #{director,jdbcType=LONGVARCHAR}, #{actor,jdbcType=LONGVARCHAR}, #{character,jdbcType=LONGVARCHAR}, 
+      #{posterPath,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="tangkeke.movie.entity.Movie">
     insert into movie
@@ -218,6 +220,9 @@
       <if test="character != null">
         character,
       </if>
+      <if test="posterPath != null">
+        poster_path,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="mid != null">
@@ -279,6 +284,9 @@
       </if>
       <if test="character != null">
         #{character,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="posterPath != null">
+        #{posterPath,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -351,6 +359,9 @@
       <if test="row.character != null">
         character = #{row.character,jdbcType=LONGVARCHAR},
       </if>
+      <if test="row.posterPath != null">
+        poster_path = #{row.posterPath,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -377,7 +388,8 @@
       vote_average = #{row.voteAverage,jdbcType=LONGVARCHAR},
       director = #{row.director,jdbcType=LONGVARCHAR},
       actor = #{row.actor,jdbcType=LONGVARCHAR},
-      character = #{row.character,jdbcType=LONGVARCHAR}
+      character = #{row.character,jdbcType=LONGVARCHAR},
+      poster_path = #{row.posterPath,jdbcType=LONGVARCHAR}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -389,6 +401,25 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+    <select id="selectTop30Movies" resultMap="ResultMapWithBLOBs">
+    SELECT m.*
+    FROM movie m
+    JOIN (
+        SELECT mid
+        FROM popular_movie
+        ORDER BY popularity DESC
+        LIMIT 30
+    ) mp ON m.mid = mp.mid
+  </select>
+  <select id="selectPersonalityMovies" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    SELECT m.*
+    FROM movie m
+    JOIN (
+        SELECT mid
+        FROM user_recs
+        where uid = #{uid,jdbcType=INTEGER}
+    ) mp ON m.mid = mp.mid
+  </select>
   <update id="updateByPrimaryKeySelective" parameterType="tangkeke.movie.entity.Movie">
     update movie
     <set>
@@ -449,6 +480,9 @@
       <if test="character != null">
         character = #{character,jdbcType=LONGVARCHAR},
       </if>
+      <if test="posterPath != null">
+        poster_path = #{posterPath,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     where mid = #{mid,jdbcType=VARCHAR}
   </update>
@@ -472,7 +506,8 @@
       vote_average = #{voteAverage,jdbcType=LONGVARCHAR},
       director = #{director,jdbcType=LONGVARCHAR},
       actor = #{actor,jdbcType=LONGVARCHAR},
-      character = #{character,jdbcType=LONGVARCHAR}
+      character = #{character,jdbcType=LONGVARCHAR},
+      poster_path = #{posterPath,jdbcType=LONGVARCHAR}
     where mid = #{mid,jdbcType=VARCHAR}
   </update>
 </mapper>

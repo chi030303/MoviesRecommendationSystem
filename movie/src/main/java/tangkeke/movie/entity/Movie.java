@@ -43,6 +43,8 @@ public class Movie implements Serializable {
 
     private String character;
 
+    private String posterPath;
+
     private static final long serialVersionUID = 1L;
 
     public String getMid() {
@@ -205,6 +207,14 @@ public class Movie implements Serializable {
         this.character = character;
     }
 
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -231,6 +241,7 @@ public class Movie implements Serializable {
         sb.append(", director=").append(director);
         sb.append(", actor=").append(actor);
         sb.append(", character=").append(character);
+        sb.append(", posterPath=").append(posterPath);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
