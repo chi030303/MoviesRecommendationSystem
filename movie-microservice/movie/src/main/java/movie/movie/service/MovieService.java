@@ -55,18 +55,6 @@ public class MovieService {
         }
     }
 
-    // public List<Movie> recMovies(boolean first){
-
-
-    //         List<Movie> movies = movieMapper.selectTop30Movies();
-        
-    //         Collections.shuffle(movies);
-
-    //         // 选择前10个随机数据
-    //         int size = Math.min(10, movies.size());
-    //         return movies.subList(0, size);
-        
-    // }
 
     // public void addLike(User user,String genres){
 
@@ -84,6 +72,10 @@ public class MovieService {
     //     // 更新用户的类型列表
     //     user.setGenres(updatedGenres);
     // }
+
+    public List<Movie> likeSearchMovies(String keyword){
+        return movieMapper.selectMByKeyword(keyword);
+    }
 
     public String createMovie(Movie movie){
             movieMapper.insert(movie);

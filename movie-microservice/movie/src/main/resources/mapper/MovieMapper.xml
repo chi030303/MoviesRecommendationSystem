@@ -321,7 +321,7 @@ ORDER BY popularity DESC
 LIMIT 30
 ) mp ON m.mid = mp.mid
 </select>
-<select id="selectMoviesByGenres" parameterType="java.lang.LONGVARCHAR" resultMap="ResultMapWithBLOBs">
+<select id="selectMoviesByGenres" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
 SELECT m.* 
 FROM movie m
 JOIN (
@@ -338,6 +338,16 @@ SELECT mid
 FROM user_recs
 where uid = #{uid,jdbcType=INTEGER}
 ) mp ON m.mid = mp.mid
+</select>
+
+<select id="selectMByKeyword" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+SELECT *
+FROM movie
+WHERE zh_title LIKE CONCAT('%', #{keyword,jdbcType=LONGVARCHAR}, '%')
+    OR title LIKE CONCAT('%', #{keyword,jdbcType=LONGVARCHAR}, '%')
+    OR genres LIKE CONCAT('%', #{keyword,jdbcType=LONGVARCHAR}, '%')
+    OR director LIKE CONCAT('%', #{keyword,jdbcType=LONGVARCHAR}, '%')
+ORDER BY (vote_average * 1 + popularity * 0.5) DESC;
 </select>
   <update id="updateByExampleSelective" parameterType="map">
     update movie

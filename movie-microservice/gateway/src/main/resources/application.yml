@@ -39,6 +39,10 @@ spring:
           uri: lb://user
           predicates:
             - Path=/user
+        - id: genre
+          uri: lb://genre
+          predicates:
+            - Path=/genre
       globalcors:
         corsConfigurations:
           "[/**]":

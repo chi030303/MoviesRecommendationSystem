@@ -55,4 +55,11 @@ public class MovieController {
     public List<Movie> getMoviesByGenre(String genre){
         return movieService.getMoviesByGenres(genre);
     }
+
+    @PostMapping("/search")
+    public List<Movie> searchMovies(String keyword) {
+        
+        return movieService.likeSearchMovies(keyword);
+    }
+    
 }

@@ -39,4 +39,6 @@ public interface MovieMapper {
     List<Movie> selectPersonalityMovies(Integer uid);
 
     List<Movie> selectMoviesByGenres(String genre);
+
+    List<Movie> selectMByKeyword(String keyword);
 }
