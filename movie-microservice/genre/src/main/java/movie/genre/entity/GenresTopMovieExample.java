@@ -1,16 +1,16 @@
-package movie.rating.entity;
+package movie.genre.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RatingExample {
+public class GenresTopMovieExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public RatingExample() {
+    public GenresTopMovieExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -104,66 +104,6 @@ public class RatingExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andUidIsNull() {
-            addCriterion("uid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidIsNotNull() {
-            addCriterion("uid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidEqualTo(Integer value) {
-            addCriterion("uid =", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidNotEqualTo(Integer value) {
-            addCriterion("uid <>", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidGreaterThan(Integer value) {
-            addCriterion("uid >", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("uid >=", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidLessThan(Integer value) {
-            addCriterion("uid <", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidLessThanOrEqualTo(Integer value) {
-            addCriterion("uid <=", value, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidIn(List<Integer> values) {
-            addCriterion("uid in", values, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidNotIn(List<Integer> values) {
-            addCriterion("uid not in", values, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidBetween(Integer value1, Integer value2) {
-            addCriterion("uid between", value1, value2, "uid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUidNotBetween(Integer value1, Integer value2) {
-            addCriterion("uid not between", value1, value2, "uid");
-            return (Criteria) this;
-        }
-
         public Criteria andMidIsNull() {
             addCriterion("mid is null");
             return (Criteria) this;
@@ -224,123 +164,63 @@ public class RatingExample {
             return (Criteria) this;
         }
 
-        public Criteria andScoreIsNull() {
-            addCriterion("score is null");
+        public Criteria andVoteAverageIsNull() {
+            addCriterion("vote_average is null");
             return (Criteria) this;
         }
 
-        public Criteria andScoreIsNotNull() {
-            addCriterion("score is not null");
+        public Criteria andVoteAverageIsNotNull() {
+            addCriterion("vote_average is not null");
             return (Criteria) this;
         }
 
-        public Criteria andScoreEqualTo(Double value) {
-            addCriterion("score =", value, "score");
+        public Criteria andVoteAverageEqualTo(Double value) {
+            addCriterion("vote_average =", value, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotEqualTo(Double value) {
-            addCriterion("score <>", value, "score");
+        public Criteria andVoteAverageNotEqualTo(Double value) {
+            addCriterion("vote_average <>", value, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreGreaterThan(Double value) {
-            addCriterion("score >", value, "score");
+        public Criteria andVoteAverageGreaterThan(Double value) {
+            addCriterion("vote_average >", value, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreGreaterThanOrEqualTo(Double value) {
-            addCriterion("score >=", value, "score");
+        public Criteria andVoteAverageGreaterThanOrEqualTo(Double value) {
+            addCriterion("vote_average >=", value, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreLessThan(Double value) {
-            addCriterion("score <", value, "score");
+        public Criteria andVoteAverageLessThan(Double value) {
+            addCriterion("vote_average <", value, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreLessThanOrEqualTo(Double value) {
-            addCriterion("score <=", value, "score");
+        public Criteria andVoteAverageLessThanOrEqualTo(Double value) {
+            addCriterion("vote_average <=", value, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreIn(List<Double> values) {
-            addCriterion("score in", values, "score");
+        public Criteria andVoteAverageIn(List<Double> values) {
+            addCriterion("vote_average in", values, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotIn(List<Double> values) {
-            addCriterion("score not in", values, "score");
+        public Criteria andVoteAverageNotIn(List<Double> values) {
+            addCriterion("vote_average not in", values, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreBetween(Double value1, Double value2) {
-            addCriterion("score between", value1, value2, "score");
+        public Criteria andVoteAverageBetween(Double value1, Double value2) {
+            addCriterion("vote_average between", value1, value2, "voteAverage");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotBetween(Double value1, Double value2) {
-            addCriterion("score not between", value1, value2, "score");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampIsNull() {
-            addCriterion("timestamp is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampIsNotNull() {
-            addCriterion("timestamp is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampEqualTo(Long value) {
-            addCriterion("timestamp =", value, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampNotEqualTo(Long value) {
-            addCriterion("timestamp <>", value, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampGreaterThan(Long value) {
-            addCriterion("timestamp >", value, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampGreaterThanOrEqualTo(Long value) {
-            addCriterion("timestamp >=", value, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampLessThan(Long value) {
-            addCriterion("timestamp <", value, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampLessThanOrEqualTo(Long value) {
-            addCriterion("timestamp <=", value, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampIn(List<Long> values) {
-            addCriterion("timestamp in", values, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampNotIn(List<Long> values) {
-            addCriterion("timestamp not in", values, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampBetween(Long value1, Long value2) {
-            addCriterion("timestamp between", value1, value2, "timestamp");
-            return (Criteria) this;
-        }
-
-        public Criteria andTimestampNotBetween(Long value1, Long value2) {
-            addCriterion("timestamp not between", value1, value2, "timestamp");
+        public Criteria andVoteAverageNotBetween(Double value1, Double value2) {
+            addCriterion("vote_average not between", value1, value2, "voteAverage");
             return (Criteria) this;
         }
     }

@@ -7,9 +7,9 @@ public class Rating implements Serializable {
 
     private Integer mid;
 
-    private String rating;
+    private Double score;
 
-    private String timestamp;
+    private Long timestamp;
 
     private static final long serialVersionUID = 1L;
 
@@ -29,19 +29,19 @@ public class Rating implements Serializable {
         this.mid = mid;
     }
 
-    public String getRating() {
-        return rating;
+    public Double getScore() {
+        return score;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setScore(Double score) {
+        this.score = score;
     }
 
-    public String getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -53,7 +53,7 @@ public class Rating implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", uid=").append(uid);
         sb.append(", mid=").append(mid);
-        sb.append(", rating=").append(rating);
+        sb.append(", score=").append(score);
         sb.append(", timestamp=").append(timestamp);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

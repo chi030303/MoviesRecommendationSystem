@@ -7,5 +7,5 @@ public class RatingDto {
 
     private Integer mid;
 
-    private String rating;
+    private Double score;
 }

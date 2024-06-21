@@ -14,13 +14,9 @@ public interface RatingMapper {
 
     int insertSelective(Rating row);
 
-    List<Rating> selectByExampleWithBLOBs(RatingExample example);
-
     List<Rating> selectByExample(RatingExample example);
 
     int updateByExampleSelective(@Param("row") Rating row, @Param("example") RatingExample example);
-
-    int updateByExampleWithBLOBs(@Param("row") Rating row, @Param("example") RatingExample example);
 
     int updateByExample(@Param("row") Rating row, @Param("example") RatingExample example);
 }
