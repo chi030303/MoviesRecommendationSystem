@@ -321,6 +321,15 @@ ORDER BY popularity DESC
 LIMIT 30
 ) mp ON m.mid = mp.mid
 </select>
+<select id="selectMoviesByGenres" parameterType="java.lang.LONGVARCHAR" resultMap="ResultMapWithBLOBs">
+SELECT m.* 
+FROM movie m
+JOIN (
+SELECT mid
+FROM genres_top_movie
+WHERE genre = #{genre,jdbcType=LONGVARCHAR}
+) mp ON m.mid = mp.mid
+</select>
 <select id="selectPersonalityMovies" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
 SELECT m.*
 FROM movie m
