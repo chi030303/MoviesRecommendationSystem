@@ -1,0 +1,9 @@
+cluster.name: elasticsearch
+node.name: es-node
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+xpack.security.enabled: false
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+network.host: 0.0.0.0
+discovery.zen.ping.unicast.hosts: ["localhost"]

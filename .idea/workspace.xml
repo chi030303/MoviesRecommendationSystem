@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="20355482-5157-4af5-9662-fcbd16e4f23d" name="更改" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="2gPgw71JQmS8EGuF6QUhhduMwZR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showModules" value="false" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/IDEAProjects/MovieRecommendSystem/recommender/ContentRecommender/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;E:/IDEAProjects/MovieRecommendSystem/recommender/DataLoader/src/main/java/org/movies/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IDEAProjects\MovieRecommendSystem\recommender\ContentRecommender\src\main\resources" />
+      <recent name="E:\IDEAProjects\MovieRecommendSystem\recommender\OnlineRecommender\src\main\resources" />
+      <recent name="E:\IDEAProjects\MovieRecommendSystem\recommender\OfflineRecommender\src\main\resources" />
+      <recent name="E:\IDEAProjects\MovieRecommendSystem\recommender\StatisticsRecommender\src\main\resources" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="20355482-5157-4af5-9662-fcbd16e4f23d" name="更改" comment="" />
+      <created>1715604861789</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715604861789</updated>
+      <workItem from="1715604862832" duration="6169000" />
+      <workItem from="1715698720414" duration="2905000" />
+      <workItem from="1715735695913" duration="487000" />
+      <workItem from="1715738448782" duration="1573000" />
+      <workItem from="1715740692350" duration="3078000" />
+      <workItem from="1715752083783" duration="1794000" />
+      <workItem from="1715909620521" duration="316000" />
+      <workItem from="1715994977562" duration="17793000" />
+      <workItem from="1716084749494" duration="2164000" />
+      <workItem from="1716099063592" duration="3513000" />
+      <workItem from="1716119275447" duration="11916000" />
+      <workItem from="1716167958225" duration="22254000" />
+      <workItem from="1716218241540" duration="2596000" />
+      <workItem from="1716261476401" duration="610000" />
+      <workItem from="1716274851729" duration="10341000" />
+      <workItem from="1716305760778" duration="901000" />
+      <workItem from="1716340842346" duration="7344000" />
+      <workItem from="1716355617777" duration="28580000" />
+      <workItem from="1716545834633" duration="1652000" />
+      <workItem from="1716547505992" duration="4958000" />
+      <workItem from="1716564251269" duration="3124000" />
+      <workItem from="1716601427080" duration="4856000" />
+      <workItem from="1716623465264" duration="3473000" />
+      <workItem from="1716687690163" duration="4822000" />
+      <workItem from="1716736861941" duration="3613000" />
+      <workItem from="1716775163750" duration="9452000" />
+      <workItem from="1717082450794" duration="381000" />
+      <workItem from="1717082883245" duration="595000" />
+      <workItem from="1717224051459" duration="176000" />
+      <workItem from="1717383510194" duration="535000" />
+      <workItem from="1718329216977" duration="4067000" />
+      <workItem from="1718710922319" duration="626000" />
+      <workItem from="1718934704106" duration="2445000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/movies/Main.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/recommender/src/main/java/org/movies/Main.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

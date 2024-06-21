@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: zookeeper:3.4.10
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - ./zookeeper/data:/data
+      - ./zookeeper/datalog:/datalog
+      - ./zookeeper/conf:/conf
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_CFG_EXTRA: |
+        dataDir=/data
+    command:
+      - zkServer.sh
+      - start-foreground
+
+  kafka:
+    image: wurstmeister/kafka:2.12-2.2.1
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: "localhost"
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_LOG_DIRS: "/kafka/logs"
+    volumes:
+      - ./kafka-data:/kafka
+    depends_on:
+      - zookeeper
+    container_name: kafka
+      
+  redis:
+    image: redis:4.0.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/usr/local/rdbfile
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - my-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.3
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 131072
+      nproc:
+        soft: 2048
+        hard: 4096
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+      - es_logs:/usr/share/elasticsearch/logs
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - my-network
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:3.4.3
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb/data/db:/data/db:Z
+      - ./mongodb/log:/var/log/mongodb:Z
+      - ./mongodb/config:/etc/config:Z
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=GJyg6841!
+    command: mongod --config /etc/config/mongod.conf
+
+volumes:
+  es_data:
+    driver: local
+  es_logs:
+    driver: local
+
+networks:
+  my-network:
+    driver: bridge
