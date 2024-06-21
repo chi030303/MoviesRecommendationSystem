@@ -1,0 +1,29 @@
+package movie.rating.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import movie.rating.dto.RatingDto;
+import movie.rating.service.RatingService;
+
+@RestController
+// @RequestMapping()
+public class RatingController {
+
+	@Autowired
+	RatingService ratingService;
+
+	@PostMapping("rating")
+	public String rating(@RequestBody RatingDto ratingDto){
+		JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        Jwt jwt = (Jwt) authentication.getCredentials();
+
+		ratingService.rating(ratingDto,jwt);
+		return "ok";
+	}
+}
