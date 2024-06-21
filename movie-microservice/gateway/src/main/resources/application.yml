@@ -1,0 +1,120 @@
+server:
+  port: 8093
+
+spring:
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+        - name: CircuitBreaker
+          args:
+            name: myCircuitBreaker
+            fallbackUri: forward:/fallback
+        - name: Retry
+          args:
+            name: myRetry
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: movie
+          uri: lb://movie
+          predicates:
+            - Path=/movies/**
+        - id: test
+          uri: lb://test
+          predicates:
+            - Path=/test1/**
+        - id: rating
+          uri: lb://rating
+          predicates:
+            - Path=/rating
+        - id: user
+          uri: lb://user
+          predicates:
+            - Path=/user
+      globalcors:
+        corsConfigurations:
+          "[/**]":
+            allowedOrigins:
+              - "http://localhost:8093"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: myclient
+            client-secret: kWQH0S2JXKzORauo3i3LF1ORZISjpNs9
+            scope: openid,profile,email
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/myjavaee
+            authorization-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/token
+            user-info-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/certs
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/certs
+          jwk-set-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/certs
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8090/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,circuitbreakers,ratelimiters,retries,timelimiters
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
+    org:
+      springframework:
+        cloud:
+          gateway: DEBUG
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      myCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 100
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 60s
+        slowCallRateThreshold: 100
+        waitDurationInOpenState: 10000
+        permittedNumberOfCallsInHalfOpenState: 3
+        eventConsumerBufferSize: 10
+        recordExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.io.IOException
+  retry:
+    instances:
+      myRetry:
+        maxAttempts: 3
+        waitDuration: 5000
+        retryExceptions:
+          - java.io.IOException
+        ignoreExceptions:
+          - org.springframework.web.client.HttpClientErrorException

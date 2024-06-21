@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.user.mapper.UserAttributeMapper">
+  <resultMap id="BaseResultMap" type="movie.user.entity.UserAttribute">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="VALUE" jdbcType="VARCHAR" property="value" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="movie.user.entity.UserAttribute">
+    <result column="LONG_VALUE_HASH" jdbcType="BINARY" property="longValueHash" />
+    <result column="LONG_VALUE_HASH_LOWER_CASE" jdbcType="BINARY" property="longValueHashLowerCase" />
+    <result column="LONG_VALUE" jdbcType="LONGVARCHAR" property="longValue" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, NAME, VALUE, USER_ID
+  </sql>
+  <sql id="Blob_Column_List">
+    LONG_VALUE_HASH, LONG_VALUE_HASH_LOWER_CASE, LONG_VALUE
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="movie.user.entity.UserAttributeExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_attribute
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="movie.user.entity.UserAttributeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_attribute
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_attribute
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_attribute
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="movie.user.entity.UserAttributeExample">
+    delete from user_attribute
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="movie.user.entity.UserAttribute">
+    insert into user_attribute (ID, NAME, VALUE, 
+      USER_ID, LONG_VALUE_HASH, LONG_VALUE_HASH_LOWER_CASE, 
+      LONG_VALUE)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{longValueHash,jdbcType=BINARY}, #{longValueHashLowerCase,jdbcType=BINARY}, 
+      #{longValue,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="movie.user.entity.UserAttribute">
+    insert into user_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="value != null">
+        VALUE,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="longValueHash != null">
+        LONG_VALUE_HASH,
+      </if>
+      <if test="longValueHashLowerCase != null">
+        LONG_VALUE_HASH_LOWER_CASE,
+      </if>
+      <if test="longValue != null">
+        LONG_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="longValueHash != null">
+        #{longValueHash,jdbcType=BINARY},
+      </if>
+      <if test="longValueHashLowerCase != null">
+        #{longValueHashLowerCase,jdbcType=BINARY},
+      </if>
+      <if test="longValue != null">
+        #{longValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="movie.user.entity.UserAttributeExample" resultType="java.lang.Long">
+    select count(*) from user_attribute
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_attribute
+    <set>
+      <if test="row.id != null">
+        ID = #{row.id,jdbcType=VARCHAR},
+      </if>
+      <if test="row.name != null">
+        NAME = #{row.name,jdbcType=VARCHAR},
+      </if>
+      <if test="row.value != null">
+        VALUE = #{row.value,jdbcType=VARCHAR},
+      </if>
+      <if test="row.userId != null">
+        USER_ID = #{row.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.longValueHash != null">
+        LONG_VALUE_HASH = #{row.longValueHash,jdbcType=BINARY},
+      </if>
+      <if test="row.longValueHashLowerCase != null">
+        LONG_VALUE_HASH_LOWER_CASE = #{row.longValueHashLowerCase,jdbcType=BINARY},
+      </if>
+      <if test="row.longValue != null">
+        LONG_VALUE = #{row.longValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update user_attribute
+    set ID = #{row.id,jdbcType=VARCHAR},
+      NAME = #{row.name,jdbcType=VARCHAR},
+      VALUE = #{row.value,jdbcType=VARCHAR},
+      USER_ID = #{row.userId,jdbcType=VARCHAR},
+      LONG_VALUE_HASH = #{row.longValueHash,jdbcType=BINARY},
+      LONG_VALUE_HASH_LOWER_CASE = #{row.longValueHashLowerCase,jdbcType=BINARY},
+      LONG_VALUE = #{row.longValue,jdbcType=LONGVARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_attribute
+    set ID = #{row.id,jdbcType=VARCHAR},
+      NAME = #{row.name,jdbcType=VARCHAR},
+      VALUE = #{row.value,jdbcType=VARCHAR},
+      USER_ID = #{row.userId,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="movie.user.entity.UserAttribute">
+    update user_attribute
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        VALUE = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="longValueHash != null">
+        LONG_VALUE_HASH = #{longValueHash,jdbcType=BINARY},
+      </if>
+      <if test="longValueHashLowerCase != null">
+        LONG_VALUE_HASH_LOWER_CASE = #{longValueHashLowerCase,jdbcType=BINARY},
+      </if>
+      <if test="longValue != null">
+        LONG_VALUE = #{longValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="movie.user.entity.UserAttribute">
+    update user_attribute
+    set NAME = #{name,jdbcType=VARCHAR},
+      VALUE = #{value,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      LONG_VALUE_HASH = #{longValueHash,jdbcType=BINARY},
+      LONG_VALUE_HASH_LOWER_CASE = #{longValueHashLowerCase,jdbcType=BINARY},
+      LONG_VALUE = #{longValue,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="movie.user.entity.UserAttribute">
+    update user_attribute
+    set NAME = #{name,jdbcType=VARCHAR},
+      VALUE = #{value,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
