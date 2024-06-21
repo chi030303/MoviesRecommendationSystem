@@ -89,4 +89,8 @@ public class MovieService {
             movieMapper.insert(movie);
             return "创建成功";
     }
+
+    public List<Movie> getMoviesByGenres(String genre){
+        return movieMapper.selectMoviesByGenres(genre);
+    }
 }

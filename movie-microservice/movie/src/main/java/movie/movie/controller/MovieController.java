@@ -26,28 +26,12 @@ public class MovieController {
 
     @Autowired
     private UserServiceFeignClient userServiceFeignClient;
-    // @Autowired
-    // private UserService userService;
-
-    // @GetMapping("movie/{id}")
-    // public String getMovieDetails(@PathVariable("id") String id, Model model) {
-    //     System.out.println(id);
-    //     Movie movie = movieService.getMovieById(id);
-    //     model.addAttribute("movie", movie);
-    //     return "movieDetails";
-    // }
 
     @GetMapping("/{id}")
     public Movie getMovieDetails(@PathVariable("id") Integer id) {
         return movieService.getMovieById(id);
     }
 
-    @PostMapping("/{id}/rating")
-    public String rating(@RequestBody String entity) {
-        //TODO: process POST request
-        
-        return entity;
-    }
     
     @GetMapping("")
     public List<Movie> getMovieMain() {
@@ -65,5 +49,10 @@ public class MovieController {
 
 
         return movieService.createMovie(movie);
+    }
+
+    @GetMapping("/movieByGenre")
+    public List<Movie> getMoviesByGenre(String genre){
+        return movieService.getMoviesByGenres(genre);
     }
 }
