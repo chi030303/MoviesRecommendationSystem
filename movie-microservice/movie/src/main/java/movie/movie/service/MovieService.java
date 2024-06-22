@@ -31,7 +31,7 @@ public class MovieService {
     public List<Movie> recMoviesFirst(){
 
         List<Movie> movies = movieMapper.selectTop30Movies();
-        
+
         Collections.shuffle(movies);
 
         // 选择前10个随机数据
@@ -43,7 +43,7 @@ public class MovieService {
 
         if (first) {
             List<Movie> movies = movieMapper.selectTop30Movies();
-        
+
             Collections.shuffle(movies);
 
             // 选择前10个随机数据
@@ -59,13 +59,13 @@ public class MovieService {
 
 
     //         List<Movie> movies = movieMapper.selectTop30Movies();
-        
+
     //         Collections.shuffle(movies);
 
     //         // 选择前10个随机数据
     //         int size = Math.min(10, movies.size());
     //         return movies.subList(0, size);
-        
+
     // }
 
     // public void addLike(User user,String genres){
@@ -80,13 +80,17 @@ public class MovieService {
     //     genresSet.add(genres);
 
     //     String updatedGenres = genresSet.stream().collect(Collectors.joining("|"));
-        
+
     //     // 更新用户的类型列表
     //     user.setGenres(updatedGenres);
     // }
 
     public String createMovie(Movie movie){
-            movieMapper.insert(movie);
-            return "创建成功";
+        movieMapper.insert(movie);
+        return "创建成功";
+    }
+
+    public List<Movie> getMoviesByGenres(String genre){
+        return movieMapper.selectMoviesByGenres(genre);
     }
 }

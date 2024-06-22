@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="movie.rating.mapper.RatingMapper">
-  <resultMap id="BaseResultMap" type="movie.rating.entity.Rating">
-    <result column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="mid" jdbcType="INTEGER" property="mid" />
-    <result column="score" jdbcType="DOUBLE" property="score" />
-    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+<mapper namespace="movie.genre.mapper.GenreMapper">
+  <resultMap id="BaseResultMap" type="movie.genre.entity.Genre">
+    <id column="genre" jdbcType="VARCHAR" property="genre" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,15 +63,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uid, mid, score, timestamp
+    genre
   </sql>
-  <select id="selectByExample" parameterType="movie.rating.entity.RatingExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="movie.genre.entity.GenreExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from rating
+    from genre
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,69 +79,44 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="movie.rating.entity.RatingExample">
-    delete from rating
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from genre
+    where genre = #{genre,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="movie.genre.entity.GenreExample">
+    delete from genre
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="movie.rating.entity.Rating">
-    insert into rating (uid, mid, score, 
-      timestamp)
-    values (#{uid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, 
-      #{timestamp,jdbcType=BIGINT})
+  <insert id="insert" parameterType="movie.genre.entity.Genre">
+    insert into genre (genre)
+    values (#{genre,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="movie.rating.entity.Rating">
-    insert into rating
+  <insert id="insertSelective" parameterType="movie.genre.entity.Genre">
+    insert into genre
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="mid != null">
-        mid,
-      </if>
-      <if test="score != null">
-        score,
-      </if>
-      <if test="timestamp != null">
-        timestamp,
+      <if test="genre != null">
+        genre,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="mid != null">
-        #{mid,jdbcType=INTEGER},
-      </if>
-      <if test="score != null">
-        #{score,jdbcType=DOUBLE},
-      </if>
-      <if test="timestamp != null">
-        #{timestamp,jdbcType=BIGINT},
+      <if test="genre != null">
+        #{genre,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="movie.rating.entity.RatingExample" resultType="java.lang.Long">
-    select count(*) from rating
+  <select id="countByExample" parameterType="movie.genre.entity.GenreExample" resultType="java.lang.Long">
+    select count(*) from genre
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update rating
+    update genre
     <set>
-      <if test="row.uid != null">
-        uid = #{row.uid,jdbcType=INTEGER},
-      </if>
-      <if test="row.mid != null">
-        mid = #{row.mid,jdbcType=INTEGER},
-      </if>
-      <if test="row.score != null">
-        score = #{row.score,jdbcType=DOUBLE},
-      </if>
-      <if test="row.timestamp != null">
-        timestamp = #{row.timestamp,jdbcType=BIGINT},
+      <if test="row.genre != null">
+        genre = #{row.genre,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="example != null">
@@ -152,11 +124,8 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update rating
-    set uid = #{row.uid,jdbcType=INTEGER},
-      mid = #{row.mid,jdbcType=INTEGER},
-      score = #{row.score,jdbcType=DOUBLE},
-      timestamp = #{row.timestamp,jdbcType=BIGINT}
+    update genre
+    set genre = #{row.genre,jdbcType=VARCHAR}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

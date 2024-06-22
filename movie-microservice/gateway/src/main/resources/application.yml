@@ -39,6 +39,10 @@ spring:
           uri: lb://user
           predicates:
             - Path=/user
+        - id: genre
+          uri: lb://genre
+          predicates:
+          - Path=/genre
       globalcors:
         corsConfigurations:
           "[/**]":
@@ -58,21 +62,21 @@ spring:
         registration:
           keycloak:
             client-id: myclient
-            client-secret: kWQH0S2JXKzORauo3i3LF1ORZISjpNs9
+            client-secret: 7xA2dJ6PXt3QB5jEO2ty3Yd7rpn3gFAx
             scope: openid,profile,email
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           keycloak:
-            issuer-uri: http://localhost:8080/realms/myjavaee
-            authorization-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/auth
-            token-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/token
-            user-info-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/userinfo
-            jwk-set-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/certs
+            issuer-uri: http://localhost:8081/realms/movie
+            authorization-uri: http://localhost:8081/realms/movie/protocol/openid-connect/auth
+            token-uri: http://localhost:8081/realms/movie/protocol/openid-connect/token
+            user-info-uri: http://localhost:8081/realms/movie/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8081/realms/movie/protocol/openid-connect/certs
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/certs
-          jwk-set-uri: http://localhost:8080/realms/myjavaee/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8081/realms/movie/protocol/openid-connect/certs
+          jwk-set-uri: http://localhost:8081/realms/movie/protocol/openid-connect/certs
 
 eureka:
   client:

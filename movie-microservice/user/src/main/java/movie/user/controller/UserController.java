@@ -25,4 +25,13 @@ public class UserController {
 
 		return userService.isFirst(jwt);
 	}
+
+	@GetMapping("/whoamI")
+	public String getCurrUid(){
+		        // 获取当前登录的用户信息
+        JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        Jwt jwt = (Jwt) authentication.getCredentials();
+
+		return jwt.getClaimAsString("sub");
+	}
 }

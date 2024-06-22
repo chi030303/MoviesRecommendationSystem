@@ -13,10 +13,10 @@
         <module>register</module>
         <module>gateway</module>
         <module>movie</module>
-        <module>authorization</module>
         <module>test</module>
         <module>rating</module>
         <module>user</module>
+        <module>genre</module>
     </modules>
 
     <properties>

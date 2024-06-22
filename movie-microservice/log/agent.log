@@ -1,0 +1,5 @@
+2024-06-21 22:37:29,037  INFO --- [http-nio-8094-exec-2] movie.rating.service.RatingService                                              (line:    42) : MOVIE_RATING_PREFIX:1|153|123.000000|1718980648529
+2024-06-21 22:38:58,341  INFO --- [http-nio-8094-exec-4] movie.rating.service.RatingService                                              (line:    42) : MOVIE_RATING_PREFIX:1|153|1.000000|1718980738337
+2024-06-21 22:39:29,948  INFO --- [http-nio-8094-exec-6] movie.rating.service.RatingService                                              (line:    42) : MOVIE_RATING_PREFIX:1|153|1.000000|1718980769942
+2024-06-22 08:37:57,714  INFO --- [http-nio-8094-exec-2] movie.rating.service.RatingService                                              (line:    42) : MOVIE_RATING_PREFIX:1|123|5.000000|1719016677118
+2024-06-22 08:41:18,458  INFO --- [http-nio-8094-exec-4] movie.rating.service.RatingService                                              (line:    42) : MOVIE_RATING_PREFIX:1|2|5.000000|1719016878454
